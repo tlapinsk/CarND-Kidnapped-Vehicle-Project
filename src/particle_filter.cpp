@@ -108,7 +108,6 @@ void ParticleFilter::dataAssociation(std::vector<LandmarkObs> predicted, std::ve
 			}
 		}
 	}
-
 }
 
 void ParticleFilter::updateWeights(double sensor_range, double std_landmark[], 
@@ -172,7 +171,6 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 				}
 			}
 			transformed_obs.push_back(temp_ob);
-			
 		}
 
 		// Update weights
@@ -209,15 +207,15 @@ void ParticleFilter::resample() {
 Particle ParticleFilter::SetAssociations(Particle& particle, const std::vector<int>& associations, 
                                      const std::vector<double>& sense_x, const std::vector<double>& sense_y)
 {
-    //particle: the particle to assign each listed association, and association's (x,y) world coordinates mapping to
-    // associations: The landmark id that goes along with each listed association
-    // sense_x: the associations x mapping already converted to world coordinates
-    // sense_y: the associations y mapping already converted to world coordinates
-    particle.associations = associations;
-    particle.sense_x      = sense_x;
-    particle.sense_y      = sense_y;
+  //particle: the particle to assign each listed association, and association's (x,y) world coordinates mapping to
+  // associations: The landmark id that goes along with each listed association
+  // sense_x: the associations x mapping already converted to world coordinates
+  // sense_y: the associations y mapping already converted to world coordinates
+  particle.associations = associations;
+  particle.sense_x      = sense_x;
+  particle.sense_y      = sense_y;
 
-    return particle;
+  return particle;
 }
 
 string ParticleFilter::getAssociations(Particle best)
