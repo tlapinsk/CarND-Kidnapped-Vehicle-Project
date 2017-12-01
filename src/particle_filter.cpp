@@ -58,8 +58,8 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
 	double std_x, std_y, std_theta;
-	std_x = std_pos[0];
-	std_y = std_pos[1];
+	std_x     = std_pos[0];
+	std_y     = std_pos[1];
 	std_theta = std_pos[2];
 	default_random_engine gen;
 
@@ -84,8 +84,8 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 		normal_distribution<double> dist_theta(particles[i].theta, std_theta);
 
 		// Add noise
-	 	particles[i].x = dist_x(gen);
-	 	particles[i].y = dist_y(gen);
+	 	particles[i].x     = dist_x(gen);
+	 	particles[i].y     = dist_y(gen);
 	 	particles[i].theta = dist_theta(gen);
 	}
 }
@@ -132,8 +132,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	// Loop over particles
 	for (int i = 0; i < num_particles; ++i)
 	{	
-		double particle_x = particles[i].x;
-		double particle_y = particles[i].y;
+		double particle_x     = particles[i].x;
+		double particle_y     = particles[i].y;
 		double particle_theta = particles[i].theta;
 		
 		Map selected_map;
@@ -213,9 +213,11 @@ Particle ParticleFilter::SetAssociations(Particle& particle, const std::vector<i
     // associations: The landmark id that goes along with each listed association
     // sense_x: the associations x mapping already converted to world coordinates
     // sense_y: the associations y mapping already converted to world coordinates
-    particle.associations= associations;
-    particle.sense_x = sense_x;
-    particle.sense_y = sense_y;
+    particle.associations = associations;
+    particle.sense_x      = sense_x;
+    particle.sense_y      = sense_y;
+
+    return particle;
 }
 
 string ParticleFilter::getAssociations(Particle best)
