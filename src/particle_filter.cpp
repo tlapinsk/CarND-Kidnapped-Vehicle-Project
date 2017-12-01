@@ -66,17 +66,17 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	// Check is yaw_rate is zero
 	for (int i = 0; i < num_particles; ++i) 
 	{
-		if(abs(yaw_rate) < 0.0001) 
-		{
-			// Add measurements to particles
-      particles[i].x += velocity * delta_t * cos(particles[i].theta);
-      particles[i].y += velocity * delta_t * sin(particles[i].theta);
-		} else 
+		if(abs(yaw_rate) != 0) 
 		{
 			// Add measurements to particles
 			particles[i].x     += (velocity/yaw_rate) * (sin(particles[i].theta + (yaw_rate * delta_t)) - sin(particles[i].theta));
       particles[i].y     += (velocity/yaw_rate) * (cos(particles[i].theta) - cos(particles[i].theta + (yaw_rate * delta_t)));
       particles[i].theta += yaw_rate * delta_t;
+		} else 
+		{
+			// Add measurements to particles
+      particles[i].x += velocity * delta_t * cos(particles[i].theta);
+      particles[i].y += velocity * delta_t * sin(particles[i].theta);
 		}
 		// Normal distributions for x, y, theta
 	 	normal_distribution<double> dist_x(particles[i].x, std_x);
