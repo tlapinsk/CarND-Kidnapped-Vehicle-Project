@@ -2,7 +2,7 @@
  * particle_filter.cpp
  *
  *  Created on: Dec 12, 2016
- *      Author: Tiffany Huang
+ *  Author: Tiffany Huang
  */
 #include <random>
 #include <algorithm>
@@ -20,9 +20,6 @@
 using namespace std;
 
 #define num_particles 100
-#define PI 3.14159265359
-
-bool debug = false;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// TODO: Set the number of particles. Initialize all particles to first position (based on estimates of 
@@ -156,7 +153,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			}
 		}
 
-		std::vector<LandmarkObs> transformed_obs;
+		vector<LandmarkObs> transformed_obs;
 		LandmarkObs tmp_ob;
 
 		// Loops over observations
@@ -183,11 +180,11 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 		// Update weights
 		double new_weights = 1.0;
-		for (int j = 0; j < transformed_obs.size(); ++j)  // loop for every ob
+		for (int j = 0; j < transformed_obs.size(); ++j)
 		{	
 			new_weights *= exp(-pow(transformed_obs[j].x - selected_map.landmark_list[transformed_obs[j].id].x_f, 2)/2.0/pow(std_r, 2)
 						-pow(transformed_obs[j].y - selected_map.landmark_list[transformed_obs[j].id].y_f, 2)/2.0/pow(std_b,2))/
-						2.0/PI/std_r/std_b;
+						2.0/M_PI/std_r/std_b;
 			
 		}
 		weights.push_back(new_weights);
@@ -220,17 +217,9 @@ Particle ParticleFilter::SetAssociations(Particle& particle, const std::vector<i
     // associations: The landmark id that goes along with each listed association
     // sense_x: the associations x mapping already converted to world coordinates
     // sense_y: the associations y mapping already converted to world coordinates
-
-		//Clear the previous associations
-		particle.associations.clear();
-		particle.sense_x.clear();
-		particle.sense_y.clear();
-
     particle.associations= associations;
     particle.sense_x = sense_x;
     particle.sense_y = sense_y;
-
-    return particle;
 }
 
 string ParticleFilter::getAssociations(Particle best)
