@@ -9,12 +9,11 @@
 #include <iostream>
 #include <numeric>
 #include <math.h> 
-#include <iostream>
 #include <sstream>
 #include <string>
 #include <iterator>
 #include <array>
-#include "map.h"
+
 #include "particle_filter.h"
 
 using namespace std;
