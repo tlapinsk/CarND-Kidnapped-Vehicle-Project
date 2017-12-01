@@ -49,9 +49,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 		weights.push_back(weight);
 		particles.push_back(pars);
 	}
-
 	is_initialized = true;
-
 }
 
 void ParticleFilter::prediction(double delta_t, double std_pos[], double velocity, double yaw_rate) {
@@ -149,43 +147,43 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 				abs(map_landmarks.landmark_list[j].y_f - particle_y) <= sensor_range)
 			{
 				selected_map.landmark_list.push_back(map_landmarks.landmark_list[j]);
-				
 			}
 		}
 
 		vector<LandmarkObs> transformed_obs;
-		LandmarkObs tmp_ob;
+		LandmarkObs temp_ob;
 
 		// Loops over observations
 		for (int j = 0; j < observations.size(); ++j)
 		{	
-			tmp_ob.x = observations[j].x * cos(particle_theta) - observations[j].y * sin(particle_theta) + particle_x;
-			tmp_ob.y = observations[j].x * sin(particle_theta) + observations[j].y * cos(particle_theta) + particle_y;
+			temp_ob.x = observations[j].x * cos(particle_theta) - observations[j].y * sin(particle_theta) + particle_x;
+			temp_ob.y = observations[j].x * sin(particle_theta) + observations[j].y * cos(particle_theta) + particle_y;
 
-			double distance = pow(selected_map.landmark_list[0].x_f - tmp_ob.x, 2) + pow(selected_map.landmark_list[0].y_f-tmp_ob.y, 2); // first landmark
-			double tmp_dist;
-			tmp_ob.id = 0;
+			double distance = pow(selected_map.landmark_list[0].x_f - temp_ob.x, 2) + pow(selected_map.landmark_list[0].y_f-temp_ob.y, 2); // first landmark
+			double temp_dist;
+			temp_ob.id = 0;
 			for (int k = 1; k < selected_map.landmark_list.size(); ++k)
 			{
-				tmp_dist = pow(selected_map.landmark_list[k].x_f - tmp_ob.x,2) + pow(selected_map.landmark_list[k].y_f-tmp_ob.y,2);
-				if (tmp_dist < distance)
+				temp_dist = pow(selected_map.landmark_list[k].x_f - temp_ob.x,2) + pow(selected_map.landmark_list[k].y_f-temp_ob.y,2);
+				if (temp_dist < distance)
 				{
-					distance = tmp_dist;
-					tmp_ob.id = k;
+					distance = temp_dist;
+					temp_ob.id = k;
 				}
 			}
-			transformed_obs.push_back(tmp_ob);
+			transformed_obs.push_back(temp_ob);
 			
 		}
 
 		// Update weights
 		double new_weights = 1.0;
+		double top, bottom;
 		for (int j = 0; j < transformed_obs.size(); ++j)
 		{	
-			new_weights *= exp(-pow(transformed_obs[j].x - selected_map.landmark_list[transformed_obs[j].id].x_f, 2)/2.0/pow(std_r, 2)
-						-pow(transformed_obs[j].y - selected_map.landmark_list[transformed_obs[j].id].y_f, 2)/2.0/pow(std_b,2))/
-						2.0/M_PI/std_r/std_b;
-			
+			top = exp(-pow(transformed_obs[j].x - selected_map.landmark_list[transformed_obs[j].id].x_f, 2)/2.0/pow(std_r, 2)
+						-pow(transformed_obs[j].y - selected_map.landmark_list[transformed_obs[j].id].y_f, 2)/2.0/pow(std_b,2));
+			bottom = 2.0/M_PI/std_r/std_b;
+			new_weights *= top/bottom;
 		}
 		weights.push_back(new_weights);
 	}
@@ -205,7 +203,6 @@ void ParticleFilter::resample() {
 		int x = distribution(gen);
 		selected_particles.push_back(particles[x]);
 	}
-
 	particles = selected_particles;
 }
 
