@@ -36,16 +36,20 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	normal_distribution<double> dist_theta(theta, std_theta);
 	
 	// Generate particles
-	for (int i = 0; i < num_particles; ++i)
-	{
-		x      = dist_x(gen);
-		y      = dist_y(gen);
-		theta  = dist_theta(gen);
-		weight = 1.0;
-		Particle pars;
-		pars = (Particle) { i, x, y, theta};
-		weights.push_back(weight);
-		particles.push_back(pars);
+	for (int i = 0; i < num_particles; ++i) {
+		x     = dist_x(gen);
+		y     = dist_y(gen);
+		theta = dist_theta(gen);
+		
+		Particle particle;
+		particle.id     = i;
+		particle.x      = x;
+		particle.y      = y;
+		particle.theta  = theta;
+		particle.weight = 1.0;
+		
+		particles.push_back(particle);
+		weights.push_back(particle.weight);
 	}
 	is_initialized = true;
 }
