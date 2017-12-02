@@ -12,7 +12,6 @@
 #include <sstream>
 #include <string>
 #include <iterator>
-#include <array>
 
 #include "particle_filter.h"
 
