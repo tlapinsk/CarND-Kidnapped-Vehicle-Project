@@ -1,10 +1,10 @@
 # Unscented-Kalman-Filter
-In this project, I used C++ to write a program that processes Lidar data to track an object via the a Particle Filter. 
+In this project, I used C++ to write a program that processes Lidar data to track an object via a Particle Filter. 
 
 ## Project Info
 For a great paper on Particle Filters, [click here](http://robots.stanford.edu/papers/thrun.pf-in-robotics-uai02.pdf)
 
-To see the implementation please visit the following three files in the 'src' folder:
+To see the implementation please visit the following file in the 'src' folder:
 
 1. particle_filter.cpp
 
@@ -22,7 +22,7 @@ FYI, I ran my code on a Macbook Pro. Please ensure you have downloaded the Udaci
 9. Run the term2_sim application, select Project 2, and click 'Start'
 
 ## Results
-My Particle Filter produced the below results.
+My Particle Filter produced these results:
 
 |  Input    |    MSE   |
 |  -----    |  ------- |
