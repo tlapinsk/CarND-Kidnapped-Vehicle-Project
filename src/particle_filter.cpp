@@ -156,7 +156,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			temp_ob.x = observations[j].x * cos(particle_theta) - observations[j].y * sin(particle_theta) + particle_x;
 			temp_ob.y = observations[j].x * sin(particle_theta) + observations[j].y * cos(particle_theta) + particle_y;
 
-			double distance = pow(selected_map.landmark_list[0].x_f - temp_ob.x, 2) + pow(selected_map.landmark_list[0].y_f-temp_ob.y, 2); // first landmark
+			double distance = pow(selected_map.landmark_list[0].x_f - temp_ob.x, 2) + pow(selected_map.landmark_list[0].y_f-temp_ob.y, 2);
 			double temp_dist;
 			temp_ob.id = 0;
 			for (int k = 1; k < selected_map.landmark_list.size(); ++k)
@@ -173,13 +173,13 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 		// Update weights
 		double new_weights = 1.0;
-		double top, bottom;
+		double num, denom;
 		for (int j = 0; j < transformed_obs.size(); ++j)
 		{	
-			top = exp(-pow(transformed_obs[j].x - selected_map.landmark_list[transformed_obs[j].id].x_f, 2)/2.0/pow(std_r, 2)
+			num = exp(-pow(transformed_obs[j].x - selected_map.landmark_list[transformed_obs[j].id].x_f, 2)/2.0/pow(std_r, 2)
 						-pow(transformed_obs[j].y - selected_map.landmark_list[transformed_obs[j].id].y_f, 2)/2.0/pow(std_b,2));
-			bottom = 2.0/M_PI/std_r/std_b;
-			new_weights *= top/bottom;
+			denom = 2.0/M_PI/std_r/std_b;
+			new_weights *= num/denom;
 		}
 		weights.push_back(new_weights);
 	}
