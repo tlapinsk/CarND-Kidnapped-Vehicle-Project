@@ -31,7 +31,7 @@ My Particle Filter produced the below results.
 |  Yaw      |  0.004   |
 
 
-![Visualization](https://github.com/tlapinsk/CarND-Unscented-Kalman-Filter-Project/blob/master/output/results.png?raw=true "Visualization")
+![Visualization](https://github.com/tlapinsk/CarND-Kidnapped-Vehicle-Project/blob/master/output/results.png?raw=true "Visualization")
 
 ## Resources
 Shoutout to the tutorials provided by Udacity and Mercedes on Particle Filters. Below are further resources and helpful links that I used to complete this project:
