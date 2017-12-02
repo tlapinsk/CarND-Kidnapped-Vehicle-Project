@@ -1,4 +1,4 @@
-# Unscented-Kalman-Filter
+# Kidnapped Vehicle Project
 In this project, I used C++ to write a program that processes Lidar data to track an object via a Particle Filter. 
 
 ## Project Info
