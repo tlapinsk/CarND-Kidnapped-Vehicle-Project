@@ -19,7 +19,7 @@ FYI, I ran my code on a Macbook Pro. Please ensure you have downloaded the Udaci
 6. `cmake`
 7. `make`
 8. `./particle_filter`
-9. Run the term2_sim application, select Project 2, and click 'Start'
+9. Run the term2_sim application, select Project 3, and click 'Start'
 
 ## Results
 My Particle Filter produced these results:
